@@ -56,7 +56,7 @@ Now, we have created another test case for adding tasks.
             
             //When user submits post request to create task endpoint
             //It gets stored in the database
-               $response->assertRedirect('/task');
+            $response->assertRedirect('/task');
          }
 
 Run the tests, and you should get green !
