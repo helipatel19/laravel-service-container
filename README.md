@@ -23,39 +23,39 @@ You need to update username and password into `.env` file.
 Here, we have created a test case to verify that user can view tasks:
 
         public function user_can_view_tasks(){
+        
+            //Given we have an authenticated user        
+            $this->actingAs(factory('App\User')->create());
                     
-           $this->actingAs(factory('App\User')->create());
-                    
-           //Given we have an task in database
-           $task = factory('App\Task')->make();
+            //Given we have an task in database
+            $task = factory('App\Task')->make();
             
-           //When user visit the task page
-           $response = $this->get('/task'); 
+            //When user visit the task page
+            $response = $this->get('/task'); 
             
-           // an user should be able to view tasks
-           $response->assertOk();
+            // an user should be able to view tasks
+            $response->assertOk();
             
         }
     
 Now, we have created another test case for adding tasks.
 
-         public function user_can_add_tasks(){
+        public function user_can_add_tasks(){
             
-             //Given we have an authenticated user
-              //And a task object
-               $task = [
-                    'title' => $this->faker->sentence,
-                    'description' => $this->faker->paragraph,
-               ];
+            //Given we have an authenticated user and a task object
             
-               $user = factory(User::class)->create();
+            $task = [
+                'title' => $this->faker->sentence,
+                'description' => $this->faker->paragraph,
+            ];
             
-               $response = $this->actingAs($user)
+            $user = factory(User::class)->create();
+            $response = $this->actingAs($user)
                                  ->withSession(['id' => $user->id])
                                  ->post('/task/store', $task);
             
-               //When user submits post request to create task endpoint
-               //It gets stored in the database
+            //When user submits post request to create task endpoint
+            //It gets stored in the database
                $response->assertRedirect('/task');
          }
 
