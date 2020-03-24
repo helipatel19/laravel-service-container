@@ -15,19 +15,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
-
 Route::group(['middleware' => ['auth'],'prefix' => 'task'], function () {
 
-    Route::get('/', 'TaskController@index');
-    Route::post('/store', 'TaskController@store');
-    Route::put('/update/{task}','TaskController@update');
-    Route::put('/delete/{task}', 'TaskController@delete');
+    Route::get('/', 'TaskController@viewTask');
+    Route::post('/store', 'TaskController@storeTask');
+    Route::put('/update/{task}','TaskController@updateTask');
+    Route::put('/delete/{task}', 'TaskController@deleteTask');
 
 });
 
 Route::get('/home', 'HomeController@index')->name('home');
 
 Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');

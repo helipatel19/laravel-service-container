@@ -27,7 +27,7 @@ class TaskController extends Controller
      * store the task into tasks table using the storeTask method of TaskService
      */
 
-    public function store(Request $request)
+    public function storeTask(Request $request)
     {
         $rules = array(
             'title' => 'required',
@@ -49,7 +49,7 @@ class TaskController extends Controller
      *  get all task data and display from the getAllTasks service method
      */
 
-    public function index()
+    public function viewTask()
     {
         $tasks = $this->taskService->getAllTasks();
         return $tasks;
@@ -59,7 +59,7 @@ class TaskController extends Controller
      * update the the task using updateTask method of TaskService
      */
 
-    public function update(Request $request)
+    public function updateTask(Request $request)
     {
         $task = $this->taskService->updateTask($request);
     }
@@ -68,7 +68,7 @@ class TaskController extends Controller
      * delete the task using deleteTask method of TaskService.
      */
 
-    public function delete($id)
+    public function deleteTask($id)
     {
         $this->taskService->deleteTask($id);
         return redirect('/task');
